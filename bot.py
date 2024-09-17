@@ -1,6 +1,5 @@
 import telebot
 import creds
-import msg
 import dicts
 from telebot import types
 
@@ -19,7 +18,7 @@ def hello(message):
     facts_button = types.InlineKeyboardButton("Интересные факты", callback_data='facts')
     markup.add(facts_button)
 
-    bot.send_message(message.chat.id, msg.greeting, reply_markup=markup)
+    bot.send_message(message.chat.id, "Выберите день:", reply_markup=markup)
 
 
 def facts(call):
