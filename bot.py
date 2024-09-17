@@ -1,92 +1,80 @@
 import telebot
 import creds
 import msg
+import dicts
 from telebot import types
 
 
 bot = telebot.TeleBot(creds.bot_token)
 
 
-# Initial message
 def hello(message):
     markup = types.InlineKeyboardMarkup()
-    day_1_button = types.InlineKeyboardButton("День 1", callback_data='day_1')
-    day_2_button = types.InlineKeyboardButton("День 2", callback_data='day_2')
-    day_3_button = types.InlineKeyboardButton("День 3", callback_data='day_3')
-    facts_button = types.InlineKeyboardButton("Интересные факты", callback_data='facts')
 
-    markup.add(day_1_button, day_2_button, day_3_button, facts_button)
+    for day_key in dicts.days.keys():
+        label = dicts.days[day_key]["label"]
+        day_button = types.InlineKeyboardButton(label, callback_data=day_key)
+        markup.add(day_button)
+
+    facts_button = types.InlineKeyboardButton("Интересные факты", callback_data='facts')
+    markup.add(facts_button)
 
     bot.send_message(message.chat.id, msg.greeting, reply_markup=markup)
 
 
 def facts(call):
     markup = types.InlineKeyboardMarkup()
-    back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
 
+    for fact_key in dicts.facts.keys():
+        label = dicts.facts[fact_key]["label"]
+        fact_button = types.InlineKeyboardButton(label, callback_data=fact_key)
+        markup.add(fact_button)
+
+    back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
     markup.add(back_button)
 
-    bot.send_message(call.message.chat.id, msg.facts, reply_markup=markup)
+    bot.send_message(call.message.chat.id, "Список фактов:", reply_markup=markup)
 
 
-# ----- DAY 1 -----
-def day_1_display(call):
+def day_display(call, day_key):
     markup = types.InlineKeyboardMarkup()
+
+    for event_key in dicts.days[day_key]["events"].keys():
+        label = dicts.days[day_key]["events"][event_key]["label"]
+        event_button = types.InlineKeyboardButton(label, callback_data=event_key)
+        markup.add(event_button)
+
     back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
-    event_1_button = types.InlineKeyboardButton(msg.day_1_event_1_label, callback_data='day_1_event_1')
-
-    markup.add(event_1_button, back_button)
-
-    bot.send_photo(call.message.chat.id, photo=open(msg.day_1_image, "rb"), caption=msg.day_1_text, reply_markup=markup)
-
-def day_1_event_1_display(call):
-    markup = types.InlineKeyboardMarkup()
-    back_button = types.InlineKeyboardButton("Назад", callback_data='day_1')
-
     markup.add(back_button)
 
-    bot.send_photo(call.message.chat.id, photo=open(msg.day_1_event_1_image, "rb"), caption=msg.day_1_event_1_text, reply_markup=markup)
-# -----------------
+    image = open(dicts.days[day_key]["image"], "rb")
+    text = dicts.days[day_key]["text"]
+
+    bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup)
 
 
-# ----- DAY 2 -----
-def day_2_display(call):
+def event_display(call, day_key, event_key):
     markup = types.InlineKeyboardMarkup()
-    event_1_button = types.InlineKeyboardButton(msg.day_2_event_1_label, callback_data='day_2_event_1')
-    back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
 
-    markup.add(event_1_button, back_button)
-
-    bot.send_photo(call.message.chat.id, photo=open(msg.day_2_image, "rb"), caption=msg.day_2_text, reply_markup=markup)
-
-def day_2_event_1_display(call):
-    markup = types.InlineKeyboardMarkup()
-    back_button = types.InlineKeyboardButton("Назад", callback_data='day_2')
-
+    back_button = types.InlineKeyboardButton("Назад", callback_data=day_key)
     markup.add(back_button)
 
-    bot.send_photo(call.message.chat.id, photo=open(msg.day_2_event_1_image, "rb"), caption=msg.day_2_event_1_text, reply_markup=markup)
-# -----------------
+    image = open(dicts.days[day_key]["events"][event_key]["image"], "rb")
+    text = dicts.days[day_key]["events"][event_key]["text"]
+
+    bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup)
 
 
-# ----- DAY 3 -----
-def day_3_display(call):
-    markup = types.InlineKeyboardMarkup()  # Создаем разметку для inline-кнопок
-    event_1_button = types.InlineKeyboardButton(msg.day_3_event_1_label, callback_data='day_3_event_1')
-    back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
-
-    markup.add(event_1_button, back_button)
-
-    bot.send_photo(call.message.chat.id, photo=open(msg.day_3_image, "rb"), caption=msg.day_3_text, reply_markup=markup)
-
-def day_3_event_1_display(call):
+def fact_display(call, fact_key):
     markup = types.InlineKeyboardMarkup()
-    back_button = types.InlineKeyboardButton("Назад", callback_data='day_3')
 
+    back_button = types.InlineKeyboardButton("Назад", callback_data='facts')
     markup.add(back_button)
 
-    bot.send_photo(call.message.chat.id, photo=open(msg.day_3_event_1_image, "rb"), caption=msg.day_3_event_1_text, reply_markup=markup)
-# -----------------
+    text = dicts.facts[fact_key]["text"]
+    image = open(dicts.facts[fact_key]["image"], "rb")
+
+    bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup)
 
 
 @bot.message_handler(commands=['start'])
@@ -100,20 +88,15 @@ def callback_inline(call):
         hello(call.message)
     elif call.data == 'facts':
         facts(call)
+    elif call.data in dicts.days.keys():
+        day_display(call, call.data)
+    elif call.data in dicts.facts.keys():
+        fact_display(call, call.data)
+    elif "event" in call.data:
+        for day_key in dicts.days.keys():
+            if call.data in dicts.days[day_key]["events"]:
+                event_display(call, day_key, call.data)
 
-    elif call.data == 'day_1':
-        day_1_display(call)
-    elif call.data == 'day_2':
-        day_2_display(call)
-    elif call.data == 'day_3':
-        day_3_display(call)
-
-    elif call.data == 'day_1_event_1':
-        day_1_event_1_display(call)
-    elif call.data == 'day_2_event_1':
-        day_2_event_1_display(call)
-    elif call.data == 'day_3_event_1':
-        day_3_event_1_display(call)
 
     bot.answer_callback_query(call.id)
 
