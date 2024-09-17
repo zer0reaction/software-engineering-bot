@@ -23,7 +23,8 @@ def day_1_display(call):
     button1 = types.InlineKeyboardButton("Назад", callback_data='hello')
     markup.add(button1)  # Добавляем кнопки в разметку
 
-    bot.send_message(call.message.chat.id, "Template day 1", reply_markup=markup)
+    bot.send_photo(call.message.chat.id, photo=open("img/test.jpg", "rb"), caption="kek", reply_markup=markup)
+
 
 def day_2_display(call):
     markup = types.InlineKeyboardMarkup()  # Создаем разметку для inline-кнопок
@@ -31,6 +32,7 @@ def day_2_display(call):
     markup.add(button1)  # Добавляем кнопки в разметку
 
     bot.send_message(call.message.chat.id, "Template day 2")
+
 
 def day_3_display(call):
     markup = types.InlineKeyboardMarkup()  # Создаем разметку для inline-кнопок
