@@ -30,9 +30,9 @@ days = {
                 "image": "img/pur_navolok.jpg"
             },
             "day_1_event_4": {
-                "label": "Гостиные дворы",
+                "label": "Гостиный двор",
                 "text": "Day 1 event 4 text",
-                "image": "img/placeholder.png"
+                "image": "img/gostiniy_dvor.jpg"
             },
             "day_1_event_5": {
                 "label": "Успенская Церковь",
@@ -42,7 +42,7 @@ days = {
             "day_1_event_6": {
                 "label": "Остров Соломбала",
                 "text": "Day 1 event 6 text",
-                "image": "img/placeholder.png"
+                "image": "img/solombala.jpeg"
             }
         }
     },
@@ -61,34 +61,29 @@ days = {
 17:30 - Прибытие в Архангельск
 
 20:00 - Выезд из отеля на автомобиле с фотографом и оборудованием в места для наблюдения за северным сиянием. Отъезд в гостиницу после экскурсии""",
-        "image": "img/placeholder.png",
+        "image": "img/day_2_main.jpeg",
         "label": "День 2",
 
         "events": {
             "day_2_event_1": {
-                "label": "Автодорога Архангельск-Пинега-Мезень",
+                "label": "Парк \"Голубино\"",
                 "text": "Day 2 event 1 text",
-                "image": "img/placeholder.png"
+                "image": "img/golubino.jpg"
             },
             "day_2_event_2": {
-                "label": "Парк \"Голубино\"",
+                "label": "Деревня Красная Горка",
                 "text": "Day 2 event 2 text",
-                "image": "img/placeholder.png"
+                "image": "img/krasnaya_gorka.jpg"
             },
             "day_2_event_3": {
-                "label": "Деревня Красная Горка",
+                "label": "Карстовые пещеры",
                 "text": "Day 2 event 3 text",
-                "image": "img/placeholder.png"
+                "image": "img/karstovaya_peshera.jpg"
             },
             "day_2_event_4": {
-                "label": "Карстовые пещеры",
-                "text": "Day 2 event 4 text",
-                "image": "img/placeholder.png"
-            },
-            "day_2_event_5": {
                 "label": "Севрное сияние",
-                "text": "Day 2 event 5 text",
-                "image": "img/placeholder.png"
+                "text": "Day 2 event 4 text",
+                "image": "img/severnoye_siyanie.jpg"
             }
         }
     },
@@ -104,24 +99,24 @@ days = {
 15:00 - Возвращение в Архангельск
 
 15:45 - Окончание программы, трансфер на ж/д вокзал""",
-        "image": "img/placeholder.png",
+        "image": "img/day_3_main.jpg",
         "label": "День 3",
 
         "events": {
             "day_3_event_1": {
                 "label": "Северодвинск",
                 "text": "Day 3 event 1 text",
-                "image": "img/placeholder.png"
+                "image": "img/severodvinsk.jpg"
             },
             "day_3_event_2": {
                 "label": "Северодвинский краеведческий музей",
                 "text": "Day 3 event 2 text",
-                "image": "img/placeholder.png"
+                "image": "img/muzei.jpg"
             },
             "day_3_event_3": {
                 "label": "Белое море",
                 "text": "Day 3 event 3 text",
-                "image": "img/placeholder.png"
+                "image": "img/beloe_more.jpg"
             }
         }
     }
