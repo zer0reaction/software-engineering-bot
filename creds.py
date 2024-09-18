@@ -1,1 +1,0 @@
-bot_token="7498194373:AAHj7MJ4yfIzI5vcWuJJyP93dpHfWzR38pY"
