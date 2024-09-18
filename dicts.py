@@ -16,32 +16,32 @@ days = {
         "events": {
             "day_1_event_1": {
                 "label": "Набережная Северной Двины",
-                "text": "Day 1 event 1 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/naberezhnaya_dvini.jpg"
             },
             "day_1_event_2": {
                 "label": "Памятник Петру I",
-                "text": "Day 1 event 2 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/petr_1.jpg"
             },
             "day_1_event_3": {
                 "label": "Мыс Пур-Наволок",
-                "text": "Day 1 event 3 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/pur_navolok.jpg"
             },
             "day_1_event_4": {
                 "label": "Гостиный двор",
-                "text": "Day 1 event 4 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/gostiniy_dvor.jpg"
             },
             "day_1_event_5": {
                 "label": "Успенская Церковь",
-                "text": "Day 1 event 5 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/uspenskaya_cerkov.jpg"
             },
             "day_1_event_6": {
                 "label": "Остров Соломбала",
-                "text": "Day 1 event 6 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/solombala.jpeg"
             }
         }
@@ -67,22 +67,22 @@ days = {
         "events": {
             "day_2_event_1": {
                 "label": "Парк \"Голубино\"",
-                "text": "Day 2 event 1 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/golubino.jpg"
             },
             "day_2_event_2": {
                 "label": "Деревня Красная Горка",
-                "text": "Day 2 event 2 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/krasnaya_gorka.jpg"
             },
             "day_2_event_3": {
                 "label": "Карстовые пещеры",
-                "text": "Day 2 event 3 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/karstovaya_peshera.jpg"
             },
             "day_2_event_4": {
                 "label": "Севрное сияние",
-                "text": "Day 2 event 4 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/severnoye_siyanie.jpg"
             }
         }
@@ -105,17 +105,17 @@ days = {
         "events": {
             "day_3_event_1": {
                 "label": "Северодвинск",
-                "text": "Day 3 event 1 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/severodvinsk.jpg"
             },
             "day_3_event_2": {
                 "label": "Северодвинский краеведческий музей",
-                "text": "Day 3 event 2 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/muzei.jpg"
             },
             "day_3_event_3": {
                 "label": "Белое море",
-                "text": "Day 3 event 3 text",
+                "text": "(Подробная информация об объекте)",
                 "image": "img/beloe_more.jpg"
             }
         }

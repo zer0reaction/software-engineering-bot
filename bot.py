@@ -97,6 +97,7 @@ def callback_inline(call):
                 event_display(call, day_key, call.data)
 
 
+    print("User " + str(call.from_user.username) + " opened " + call.data)
     bot.answer_callback_query(call.id)
 
 
