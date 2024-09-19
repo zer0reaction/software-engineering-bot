@@ -83,22 +83,25 @@ def send_welcome(message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    if call.data == 'hello':
-        hello(call.message)
-    elif call.data == 'facts':
-        facts(call)
-    elif call.data in dicts.days.keys():
-        day_display(call, call.data)
-    elif call.data in dicts.facts.keys():
-        fact_display(call, call.data)
-    elif "event" in call.data:
-        for day_key in dicts.days.keys():
-            if call.data in dicts.days[day_key]["events"]:
-                event_display(call, day_key, call.data)
+    try:
+        if call.data == 'hello':
+            hello(call.message)
+        elif call.data == 'facts':
+            facts(call)
+        elif call.data in dicts.days.keys():
+            day_display(call, call.data)
+        elif call.data in dicts.facts.keys():
+            fact_display(call, call.data)
+        elif "event" in call.data:
+            for day_key in dicts.days.keys():
+                if call.data in dicts.days[day_key]["events"]:
+                    event_display(call, day_key, call.data)
 
 
-    print("User " + str(call.from_user.username) + " opened " + call.data)
-    bot.answer_callback_query(call.id)
+        print("User " + str(call.from_user.username) + " opened " + call.data)
+        bot.answer_callback_query(call.id)
+    except:
+        print("Error!!!")
 
 
 bot.polling(none_stop=True)
