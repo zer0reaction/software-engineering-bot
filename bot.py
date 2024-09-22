@@ -19,7 +19,7 @@ def hello(message):
     markup.add(facts_button)
 
     try:
-        bot.send_message(message.chat.id, "Выберите день:", reply_markup=markup)
+        bot.send_message(message.chat.id, "Выберите день:", reply_markup=markup, parse_mode="Markdown")
     except:
         print("Error sending hello")
 
@@ -36,7 +36,7 @@ def facts(call):
     markup.add(back_button)
 
     try:
-        bot.send_message(call.message.chat.id, "Список фактов:", reply_markup=markup)
+        bot.send_message(call.message.chat.id, "Список фактов:", reply_markup=markup, parse_mode="Markdown")
     except:
         print("Error sending facts")
 
@@ -56,7 +56,7 @@ def day_display(call, day_key):
     text = dicts.days[day_key]["text"]
 
     try:
-        bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup)
+        bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup, parse_mode="Markdown")
     except:
         print("Error sending day")
 
@@ -71,7 +71,7 @@ def event_display(call, day_key, event_key):
     text = dicts.days[day_key]["events"][event_key]["text"]
 
     try:
-        bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup)
+        bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup, parse_mode="Markdown")
     except:
         print("Error sending event")
 
@@ -86,7 +86,7 @@ def fact_display(call, fact_key):
     image = open(dicts.facts[fact_key]["image"], "rb")
 
     try:
-        bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup)
+        bot.send_photo(call.message.chat.id, photo=image, caption=text, reply_markup=markup, parse_mode="Markdown")
     except:
         print("Error sending facts")
 
