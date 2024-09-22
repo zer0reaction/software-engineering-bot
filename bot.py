@@ -96,7 +96,7 @@ def send_welcome(message):
     hello(message)
 
 
-@bot.callback_query_handler(func=lambda call: True)
+@bot.callback_query_handler()
 def callback_inline(call):
     if call.data == 'hello':
         hello(call.message)
