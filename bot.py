@@ -15,7 +15,7 @@ def hello(message):
         day_button = types.InlineKeyboardButton(label, callback_data=day_key)
         markup.add(day_button)
 
-    facts_button = types.InlineKeyboardButton("Интересные факты", callback_data='facts')
+    facts_button = types.InlineKeyboardButton("Интересные факты", callback_data="facts")
     markup.add(facts_button)
 
     try:
@@ -32,7 +32,7 @@ def facts(call):
         fact_button = types.InlineKeyboardButton(label, callback_data=fact_key)
         markup.add(fact_button)
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
+    back_button = types.InlineKeyboardButton("Назад", callback_data="hello")
     markup.add(back_button)
 
     try:
@@ -49,7 +49,7 @@ def day_display(call, day_key):
         event_button = types.InlineKeyboardButton(label, callback_data=event_key)
         markup.add(event_button)
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data='hello')
+    back_button = types.InlineKeyboardButton("Назад", callback_data="hello")
     markup.add(back_button)
 
     image = open(dicts.days[day_key]["image"], "rb")
@@ -79,7 +79,7 @@ def event_display(call, day_key, event_key):
 def fact_display(call, fact_key):
     markup = types.InlineKeyboardMarkup()
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data='facts')
+    back_button = types.InlineKeyboardButton("Назад", callback_data="facts")
     markup.add(back_button)
 
     text = dicts.facts[fact_key]["text"]
@@ -91,16 +91,16 @@ def fact_display(call, fact_key):
         print("Error sending facts")
 
 
-@bot.message_handler(commands=['start'])
+@bot.message_handler(commands=["start"])
 def send_welcome(message):
     hello(message)
 
 
 @bot.callback_query_handler()
 def callback_inline(call):
-    if call.data == 'hello':
+    if call.data == "hello":
         hello(call.message)
-    elif call.data == 'facts':
+    elif call.data == "facts":
         facts(call)
     elif call.data in dicts.days.keys():
         day_display(call, call.data)
