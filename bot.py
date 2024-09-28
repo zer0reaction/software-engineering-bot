@@ -1,21 +1,20 @@
-import telebot
-import creds
-import dicts
-from telebot import types
+import telebot, creds, dicts
+from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 bot = telebot.TeleBot(creds.bot_token)
 
 
 def hello(message):
-    markup = types.InlineKeyboardMarkup()
+    markup = InlineKeyboardMarkup()
 
     for day_key in dicts.days.keys():
         label = dicts.days[day_key]["label"]
-        day_button = types.InlineKeyboardButton(label, callback_data=day_key)
+        day_button = InlineKeyboardButton(label, callback_data=day_key)
         markup.add(day_button)
 
-    facts_button = types.InlineKeyboardButton("Интересные факты", callback_data="facts")
+    facts_button = InlineKeyboardButton("Интересные факты", callback_data="facts")
+
     markup.add(facts_button)
 
     try:
@@ -25,14 +24,14 @@ def hello(message):
 
 
 def facts(call):
-    markup = types.InlineKeyboardMarkup()
+    markup = InlineKeyboardMarkup()
 
     for fact_key in dicts.facts.keys():
         label = dicts.facts[fact_key]["label"]
-        fact_button = types.InlineKeyboardButton(label, callback_data=fact_key)
+        fact_button = InlineKeyboardButton(label, callback_data=fact_key)
         markup.add(fact_button)
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data="hello")
+    back_button = InlineKeyboardButton("Назад", callback_data="hello")
     markup.add(back_button)
 
     try:
@@ -42,14 +41,14 @@ def facts(call):
 
 
 def day_display(call, day_key):
-    markup = types.InlineKeyboardMarkup()
+    markup = InlineKeyboardMarkup()
 
     for event_key in dicts.days[day_key]["events"].keys():
         label = dicts.days[day_key]["events"][event_key]["label"]
-        event_button = types.InlineKeyboardButton(label, callback_data=event_key)
+        event_button = InlineKeyboardButton(label, callback_data=event_key)
         markup.add(event_button)
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data="hello")
+    back_button = InlineKeyboardButton("Назад", callback_data="hello")
     markup.add(back_button)
 
     image = open(dicts.days[day_key]["image"], "rb")
@@ -62,9 +61,9 @@ def day_display(call, day_key):
 
 
 def event_display(call, day_key, event_key):
-    markup = types.InlineKeyboardMarkup()
+    markup = InlineKeyboardMarkup()
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data=day_key)
+    back_button = InlineKeyboardButton("Назад", callback_data=day_key)
     markup.add(back_button)
 
     image = open(dicts.days[day_key]["events"][event_key]["image"], "rb")
@@ -77,9 +76,9 @@ def event_display(call, day_key, event_key):
 
 
 def fact_display(call, fact_key):
-    markup = types.InlineKeyboardMarkup()
+    markup = InlineKeyboardMarkup()
 
-    back_button = types.InlineKeyboardButton("Назад", callback_data="facts")
+    back_button = InlineKeyboardButton("Назад", callback_data="facts")
     markup.add(back_button)
 
     text = dicts.facts[fact_key]["text"]
