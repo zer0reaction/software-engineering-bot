@@ -1,5 +1,6 @@
 import telebot, creds, dicts
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+from telebot.formatting import hspoiler
 
 
 bot = telebot.TeleBot(creds.bot_token)
@@ -14,8 +15,9 @@ def hello(message):
         markup.add(day_button)
 
     facts_button = InlineKeyboardButton("Интересные факты", callback_data="facts")
+    quiz_button = InlineKeyboardButton("Квиз", callback_data="quiz")
 
-    markup.add(facts_button)
+    markup.add(facts_button, quiz_button)
 
     try:
         bot.send_message(message.chat.id, "Выберите день:", reply_markup=markup, parse_mode="Markdown")
@@ -90,6 +92,39 @@ def fact_display(call, fact_key):
         print("Error sending facts")
 
 
+def quiz(call):
+    markup = InlineKeyboardMarkup()
+
+    text = dicts.quiz["init_text"]
+
+    for key in dicts.quiz["questions"].keys():
+        question_label = dicts.quiz["questions"][key]["label"]
+        markup.add(InlineKeyboardButton(question_label, callback_data=key))
+
+    back_button = InlineKeyboardButton("Назад", callback_data="hello")
+    markup.add(back_button)
+
+    bot.send_message(call.message.chat.id, text, reply_markup=markup)
+
+
+def question_display(call):
+    question = dicts.quiz["questions"][call.data]
+
+    text = question["text"]
+    hint = question["hint"]
+    answer = question["answer"]
+
+    markup = InlineKeyboardMarkup()
+
+    back_button = InlineKeyboardButton("Назад", callback_data="quiz")
+    markup.add(back_button)
+
+    bot.send_message(call.message.chat.id, """{}
+<b>Подсказка</b>: {}
+
+<b>Ответ</b>: {}""".format(text, hspoiler(hint), hspoiler(answer)), parse_mode="HTML", reply_markup=markup)
+
+
 @bot.message_handler(commands=["start"])
 def send_welcome(message):
     hello(message)
@@ -101,6 +136,8 @@ def callback_inline(call):
         hello(call.message)
     elif call.data == "facts":
         facts(call)
+    elif call.data == "quiz":
+        quiz(call)
     elif call.data in dicts.days.keys():
         day_display(call, call.data)
     elif call.data in dicts.facts.keys():
@@ -109,6 +146,8 @@ def callback_inline(call):
         for day_key in dicts.days.keys():
             if call.data in dicts.days[day_key]["events"]:
                 event_display(call, day_key, call.data)
+    elif "question" in call.data:
+        question_display(call)
 
 
     print("User " + str(call.from_user.username) + " opened " + call.data)

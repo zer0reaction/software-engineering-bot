@@ -158,3 +158,17 @@ facts = {
         "label": "Острова"
     }
 }
+
+quiz = {
+    "init_text": "init text test",
+
+    "questions": {
+        "question_1": {
+            "label": "test label",
+            "text": "test text",
+            "hint": "test hint",
+            "answer": "test answer"
+        }
+
+    }
+}
