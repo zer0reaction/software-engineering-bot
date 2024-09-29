@@ -119,4 +119,4 @@ def callback_inline(call):
         print("Error answering callback")
 
 
-bot.polling(none_stop=True)
+bot.polling(non_stop=True)
